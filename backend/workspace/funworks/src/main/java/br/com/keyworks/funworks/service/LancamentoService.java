@@ -1,12 +1,14 @@
 package br.com.keyworks.funworks.service;
 
 import java.time.LocalDate;
-
-import javax.transaction.Transactional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.keyworks.funworks.Dto.LancamentoDto;
@@ -24,10 +26,11 @@ public class LancamentoService implements LancamentoMapper {
 	private LancamentoMapper lancamentoMapper;
 
 	@Transactional
-	private Lancamento save(LancamentoDto lancamentoDto) {
+	public Lancamento save(LancamentoDto lancamentoDto) {
 		return lancamentoRepository.save(lancamentoMapper.toModel(lancamentoDto));
 	}
 
+	@Transactional(readOnly = true)
 	public Lancamento findById(Long id) {
 		return lancamentoRepository.findById(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lançamento não encontrado"));
@@ -46,6 +49,16 @@ public class LancamentoService implements LancamentoMapper {
 		lancamentoRepository.save(lancamento);
 	}
 
+	@Transactional(readOnly = true)
+	public List<Lancamento> findAll() {
+		return lancamentoRepository.findAll();
+	}
+
+	@Transactional(readOnly = true)
+	public Page<Lancamento> findAll(Pageable pageable) {
+		return lancamentoRepository.findAll(pageable);
+	}
+
 	@Override
 	public Lancamento toModel(LancamentoDto lancamentoDto) {
 		if (lancamentoDto == null) {
@@ -59,7 +72,7 @@ public class LancamentoService implements LancamentoMapper {
 		lancamento.setUsuarioLancamento(lancamento.getUsuarioLancamento());
 		lancamento.setValor(lancamento.getValor());
 
-		return null;
+		return lancamento;
 	}
 
 	@Override
