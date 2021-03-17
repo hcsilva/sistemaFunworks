@@ -1,6 +1,6 @@
 # SistemaFunworks
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.4.
 
 ## Development server
 
