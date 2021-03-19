@@ -1,0 +1,12 @@
+.menu {
+    background-color: #F5F5F5;
+    width: 200px;
+}
+
+.menu a {
+    color: black;
+}
+
+.menu i {
+    padding-right: 10px;
+}

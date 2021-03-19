@@ -1,11 +1,12 @@
 .footer {
     position: fixed;
     bottom: 0;
-    display: flex;
+    display: inline-flex;
     justify-content: flex-end;
 }
 
-.footer span {
-    font-size: 1rem;
-    font-weight: 300;
+.logo {
+    max-height: 25px;
+    margin-top: 15px;
+    margin-right: 15px;
 }
